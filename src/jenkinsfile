@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+        tools {
+        // Install the Maven version configured as "M3" and add it to the path.
+        maven "MAVEN_3.9.1"
+        jdk "JDK-17"
+    }
+    stages {
+        stage('test') {
+            steps {
+                bat 'mvn clean compile test'
+            }
+        }
+        stage('Build Application') {
+            steps {
+                echo 'mvn clean install -Dmaven.test.skip=true'
+            }
+        }
+    }
+}
